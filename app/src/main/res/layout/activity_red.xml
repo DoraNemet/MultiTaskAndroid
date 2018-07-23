@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RedActivity">
+    tools:context=".RedActivity"
+    android:background="#FF5B4C">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@android:color/white"
+        android:text="Bilješke"
+        android:textSize="20dp" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_alignParentRight="true"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"/>
+
+    <ListView
+        android:background="@android:color/white"
+        android:layout_below="@id/title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/calculatorButton"
+            style="@style/NavButton"
+            android:text="Kalkulator" />
+
+        <Button
+            android:id="@+id/fuelButton"
+            style="@style/NavButton"
+            android:text="Gorvio" />
+
+        <Button
+            android:id="@+id/notesButton"
+            style="@style/NavButton"
+            android:text="Bilješke" />
+    </LinearLayout>
+
+</RelativeLayout>
