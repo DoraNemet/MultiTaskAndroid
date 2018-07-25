@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView lastScreen;
     private String display = "";
     private String currentOperator = "";
-    private Double va, vb, result;
+    private Double va, vb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
     public void onClickAC(View view) {
         display = "";
         currentOperator = "";
-        result = 0.0;
         va = 0.0;
         vb = 0.0;
         currentScreen.setText("");
@@ -103,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
             currentScreen.setText(text);
         }
     }
-
 
     public void onClickEquals(View view) {
         if (currentOperator != "") {
