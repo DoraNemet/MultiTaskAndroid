@@ -9,11 +9,10 @@
 
 
     <TextView
-        android:textSize="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:text="Kalkulator" />
+        android:id="@+id/title"
+        style="@style/Title"
+        android:text="Kalkulator"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/lastNumber"
@@ -211,8 +210,8 @@
 
             <Button
                 android:id="@+id/equals"
-                android:onClick="onClickEquals"
                 style="@style/CalcButton"
+                android:onClick="onClickEquals"
                 android:text="=" />
         </LinearLayout>
 

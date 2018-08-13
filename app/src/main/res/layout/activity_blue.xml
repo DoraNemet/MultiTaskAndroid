@@ -9,18 +9,15 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:text="Gorivo"
-        android:textSize="20dp" />
+        style="@style/Title"
+        android:text="Gorivo" />
 
     <LinearLayout
-        android:layout_marginLeft="15dp"
-        android:layout_below="@+id/title"
         android:id="@+id/mainPart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="15dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -104,7 +101,7 @@
                 style="@style/FuelText"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="0" />
+                android:text="0" />
 
             <TextView
                 style="@style/FuelTextUnits"
@@ -127,7 +124,7 @@
                 style="@style/FuelText"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="0" />
+                android:text="0" />
 
             <TextView
                 style="@style/FuelTextUnits"
@@ -137,9 +134,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
         <Button
