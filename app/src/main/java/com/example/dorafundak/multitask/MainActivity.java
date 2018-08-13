@@ -50,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickNumber(View view) {
         Button button = (Button) view;
+        if (currentOperator == "=") {
+            currentOperator = "";
+            va = 0.0;
+            vb = 0.0;
+            lastScreen.setText("");
+        }
         display += button.getText();
         updateScreen();
     }
@@ -57,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
     public void onClickOperator(View view) {
         Button b = (Button) view;
         display = "";
-        if (currentOperator != "") {
+
+        if (currentOperator != "" && currentOperator != "=") {
             vb = Double.parseDouble(currentScreen.getText().toString());
 
             if (currentOperator.equals("+")) {
@@ -99,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         String text = currentScreen.getText().toString();
         if (text != "") {
             text = text.substring(0, text.length() - 1);
+            display = text;
             currentScreen.setText(text);
         }
     }
