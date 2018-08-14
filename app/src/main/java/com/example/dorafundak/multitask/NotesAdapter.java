@@ -14,7 +14,6 @@ import java.util.ArrayList;
 class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
     private ArrayList<Note> mNotes;
-    private Context mContext;
 
     public NotesAdapter(ArrayList<Note> notes) {
         mNotes = notes;
@@ -50,7 +49,12 @@ class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
     }
 
     public void insert(Note note) {
-        this.mNotes.add(note);
-        this.notifyDataSetChanged();
+        mNotes.add(note);
+        notifyDataSetChanged();
+    }
+
+    public void remove(int position) {
+        mNotes.remove(position);
+        notifyDataSetChanged();
     }
 }

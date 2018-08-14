@@ -1,7 +1,9 @@
 package com.example.dorafundak.multitask;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,14 +25,11 @@ public class RedActivity extends AppCompatActivity {
 
     Button calculatorButton;
     Button fuelButton;
-    ArrayList<Note> notesList = new ArrayList<>();
     TextView addNote;
     Dialog dialog;
 
     RecyclerView notesRecyclerView;
     NotesAdapter mNotesAdapter;
-    RecyclerView.LayoutManager mLayoutManager;
-    RecyclerView.ItemDecoration mItemDecoration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +56,37 @@ public class RedActivity extends AppCompatActivity {
         });
 
         //setup RecyclerView
-         notesRecyclerView = this.findViewById(R.id.listView);
-        ArrayList<Note> notes = loadNotes();
+        notesRecyclerView = this.findViewById(R.id.listView);
+        final ArrayList<Note> notes = loadNotes();
         mNotesAdapter = new NotesAdapter(notes);
         notesRecyclerView.setAdapter(this.mNotesAdapter);
         notesRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        notesRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(RedActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, final int position) {
+                final int mpos = position;
+                AlertDialog alertDialog = new AlertDialog.Builder(RedActivity.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Are you sure you want to delete " + notes.get(position).getNote() + "?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Note note = new Note(notes.get(position).getNote());
+                                NoteDBHelper.getInstance(RedActivity.this).removeNote(note);
+                                mNotesAdapter = (NotesAdapter) notesRecyclerView.getAdapter();
+                                mNotesAdapter.remove(position);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        })
+                        .show();
+            }
+        }));
+
         addNoteSetup();
     }
 
@@ -76,12 +101,14 @@ public class RedActivity extends AppCompatActivity {
                 Button cancelButton = dialog.findViewById(R.id.cancelButton);
                 Button saveButton = dialog.findViewById(R.id.saveButton);
                 final EditText noteInput = dialog.findViewById(R.id.noteInput);
+                //show keyboard
                 noteInput.requestFocus();
                 dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //remove keyboard
                         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(noteInput.getWindowToken(), 0);
                         dialog.dismiss();
@@ -91,7 +118,7 @@ public class RedActivity extends AppCompatActivity {
                 saveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(noteInput.getText().toString() != null) {
+                        if (noteInput.getText().toString() != null) {
                             Note note = new Note(noteInput.getText().toString());
                             NoteDBHelper.getInstance(getApplicationContext()).insertNote(note);
                             NotesAdapter adapter = (NotesAdapter) notesRecyclerView.getAdapter();
@@ -107,6 +134,8 @@ public class RedActivity extends AppCompatActivity {
     }
 
     private ArrayList<Note> loadNotes() {
-        return NoteDBHelper.getInstance(this).getAllNotes();
+        return NoteDBHelper.getInstance(this).selectAllNotes();
     }
+
+
 }
