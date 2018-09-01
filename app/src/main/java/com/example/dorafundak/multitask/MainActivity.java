@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             currentOperator = b.getText().toString();
             currentScreen.setText(currentOperator);
 
-        } else if (currentOperator == "" && display.isEmpty()) {
+        } else if (currentOperator == "" && display == "") {
             return;
         } else {
             display = "";
