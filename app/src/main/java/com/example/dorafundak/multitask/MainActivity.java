@@ -62,9 +62,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickOperator(View view) {
         Button b = (Button) view;
-        display = "";
+
 
         if (currentOperator != "" && currentOperator != "=") {
+            display = "";
             vb = Double.parseDouble(currentScreen.getText().toString());
 
             if (currentOperator.equals("+")) {
@@ -80,7 +81,10 @@ public class MainActivity extends AppCompatActivity {
             currentOperator = b.getText().toString();
             currentScreen.setText(currentOperator);
 
+        } else if (currentOperator == "" && display.isEmpty()) {
+            return;
         } else {
+            display = "";
             currentOperator = b.getText().toString();
             if (!lastScreen.getText().toString().equals("")) {
                 va = Double.parseDouble(lastScreen.getText().toString());
