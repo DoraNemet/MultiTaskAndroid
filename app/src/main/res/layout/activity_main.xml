@@ -135,6 +135,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/n4"
                 style="@style/CalcButton"
                 android:onClick="onClickNumber"
                 android:text="4" />
@@ -144,6 +145,7 @@
                 android:layout_height="match_parent" />
 
             <Button
+                android:id="@+id/n5"
                 style="@style/CalcButton"
                 android:onClick="onClickNumber"
                 android:text="5" />
